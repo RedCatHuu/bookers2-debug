@@ -1,0 +1,34 @@
+<div class="container">
+<h2>Follow Users</h2>
+<% if @following.exists? %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @following.each do |f| %>
+    <tr>
+      <td><%= image_tag f.get_profile_image, size: '50x50' %></td>
+      <td><%= f.name %></td>
+      <td>
+        フォロー数:<%= f.following.count %>
+      </td>
+      <td>
+        フォロワー数:<%= f.followers.count %>
+      </td>
+      <td>
+        <%= link_to 'Show', user_path(f) %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>ユーザーはいません</p>
+<% end %>
+</div>

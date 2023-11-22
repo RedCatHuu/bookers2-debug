@@ -9,7 +9,13 @@ Rails.application.routes.draw do
     resource :favorite, only: [:create, :destroy]
   end
   
-  resources :users
+  resources :users do
+    resource :relationship, only: [:create, :destroy]
+    member do
+      get 'following' => "relationships#following", as:"following"
+      get 'followers' => "relationships#followers", as:"followers"
+    end
+  end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
