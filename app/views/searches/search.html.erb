@@ -1,0 +1,53 @@
+<container class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <table class="table">
+        <% if @model == "User" %>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Introduction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @searches.each do |s| %>
+            <tr>
+              <td><%= image_tag s.get_profile_image, size: '70x70' %></td>
+              <td>
+                <%= link_to book_path(s) do %>
+                  <%= s.name %>
+                <% end %>
+              </td>
+              <td><%= s.introduction %></td>
+            </tr>
+          <% end %>
+            
+        <% else %>
+            
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @searches.each do |s| %>
+            <tr>
+              <td><%= image_tag s.user.get_profile_image, size: '70x70' %></td>
+              <td>
+                <%= link_to book_path(s) do %>
+                  <%= s.title %>
+                <% end %>
+              </td>
+              <td><%= s.body %></td>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</container>
