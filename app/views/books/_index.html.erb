@@ -16,20 +16,11 @@
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
-        <td>
-          <% if book.favorited_by?(current_user) %>
-          <p>
-            <%= link_to book_favorite_path(book), method: :delete do %>
-              ♥<%= book.favorites.count %>
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to book_favorite_path(book), method: :post do %>
-             ♡<%= book.favorites.count %>
-            <% end %>
-          </p>
-          <% end %>
+        <!--%= book.id %>によってbookのidを取得し、id=favorite_buttons_idとなる-->
+        <!--例えば、book.id=1の場合、id=favorite_buttons_1となる。-->
+        <!--こうして一意のidを生成することで、jsが要素を特定できる。-->
+        <td id="favorite_buttons_<%= book.id %>">
+          <%= render 'favorites/favorite', book: book %>
         </td>
         <td>
           コメント数: <%= book.book_comments.count %>
