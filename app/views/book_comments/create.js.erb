@@ -1,0 +1,4 @@
+$('.comment_count').html("コメント数:<%= @book.book_comments.count %>");
+$('.comments').html("<%= j(render partial: 'book_comments/book_comment', locals:{ book: @comment.book }) %>");
+$('.comment_textarea').val("");
+
