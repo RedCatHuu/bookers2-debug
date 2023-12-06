@@ -10,6 +10,12 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'index', books: @books%>
+      <% @tag_list.each do |list| %>
+        <div>
+          <i class="fa-solid fa-tags"></i>
+        </div>
+        <%= list.name %>
+      <% end %>
     </div>
   </div>
 </div>
