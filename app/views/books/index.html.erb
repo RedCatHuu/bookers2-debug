@@ -10,11 +10,11 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'index', books: @books%>
-      <% @tag_list.each do |list| %>
-        <div>
-          <i class="fa-solid fa-tags"></i>
-        </div>
-        <%= list.name %>
+      <% @tag_list.each do |tag| %>
+        <span>
+          <i class="fa-solid fa-hashtag"></i>
+        </span>
+        <%= link_to tag.name, search_tag_path(tag_id: tag.id) %> &nbsp;
       <% end %>
     </div>
   </div>

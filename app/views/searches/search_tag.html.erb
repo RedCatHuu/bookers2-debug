@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <div>
+          <p>#<%= @tag.name %></p>
+          <p>検索結果: <%= @tag.books.count %>作品</p>
+        </div>
+        <thead>
+          <th>Title</th>
+          <th>Opinion</th>
+        </thead>
+        <tbody>
+          <% @tag.books.each do |book| %>
+          <tr>
+            <td>
+              <%= link_to book_path(book) do %>
+                <%= book.title %>
+              <% end %>
+            </td>
+            <td><%= book.body %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

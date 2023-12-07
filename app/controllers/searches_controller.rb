@@ -29,6 +29,10 @@ class SearchesController < ApplicationController
     end 
   end 
   
+  def search_tag
+    @tag = Tag.find(params[:tag_id])
+  end 
+  
   def show
   end 
   
