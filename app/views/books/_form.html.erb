@@ -8,8 +8,10 @@
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
   
-  <label>タグ</label>
-  <%= f.text_field :name, class: 'form-control' %>
+  <div class="form-group">
+    <label>タグ</label>
+    <%= f.text_field :name, value: book.tags.pluck(:name).join(" "), class: 'form-control' %>
+  </div>
   
   <div class="form-group mt-3">
     <%= f.submit class: 'btn btn-success' %>
