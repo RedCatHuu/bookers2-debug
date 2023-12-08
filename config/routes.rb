@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get "home/about"=>"homes#about"
   get "search" => "searches#search"
+  get "search_tag" => "searches#search_tag"
 
   resources :books do
     resources :book_comments, only: [:create, :destroy]

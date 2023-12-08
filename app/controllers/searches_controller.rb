@@ -14,7 +14,7 @@ class SearchesController < ApplicationController
       when 4 then
         @searches = User.where("name LIKE ?", "%#{search_word}%")
       end
-      
+
     else
       case how.to_i
       when 1 then
@@ -25,12 +25,16 @@ class SearchesController < ApplicationController
         @searches = Book.where("title LIKE ? or body LIKE ?", "#{search_word}%", "#{search_word}%")
       when 4 then
         @searches = Book.where("title LIKE ? or body LIKE ?", "%#{search_word}%", "%#{search_word}%")
-      end 
-    end 
-  end 
-  
+      end
+    end
+  end
+
+  def search_tag
+    @tag = Tag.find(params[:tag_id])
+  end
+
   def show
-  end 
-  
-    
+  end
+
+
 end

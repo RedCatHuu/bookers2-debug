@@ -31,8 +31,16 @@
           </td>
         </tr>
         </table>
+        <!--タグ-->
+        <% @book.tags.each do |tags| %>
+          <span>
+            <i class="fa-solid fa-hashtag"></i>
+          </span>
+          <%= link_to tags.name, search_tag_path(tag_id: tags.id) %> &nbsp;
+        <% end %>
+        
         <!--コメント-->
-        <div class="comments">
+        <div class="comments mt-3">
           <%= render 'book_comments/book_comment', book: @book %>
         </div>
         
