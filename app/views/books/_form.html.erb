@@ -10,6 +10,7 @@
   
   <div class="form-group">
     <label>タグ</label>
+    <!--valueがないとedit画面にタグが表示されない。pluckでタグを分割し、joinでスペースを挿入している。-->
     <%= f.text_field :name, value: book.tags.pluck(:name).join(" "), class: 'form-control' %>
   </div>
   
