@@ -17,8 +17,17 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @books = Book.all
     @tag_list = Tag.all
+    
+    # paramsに"new"が含まれているか確認。
+    if params[:new].present?
+      @books = Book.sort_new
+    elsif params[:old].present?
+      @books = Book.sort_old
+    else
+      @books = Book.all
+    end 
+    
   end
 
   def create

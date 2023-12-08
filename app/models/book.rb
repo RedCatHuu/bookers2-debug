@@ -40,4 +40,10 @@ class Book < ApplicationRecord
     end 
   end 
   
+  # scope :sort_new, -> { order(created_at: :desc)}
+  # カラムをidにしても同じ。
+  scope :sort_new, -> { order(id: :desc)}
+  # 以下はscope :sort_new, -> { order(created_at: :asc)}と同じ意味デフォルトがascだから記述はいらない。
+  scope :sort_old, -> { order(:created_at)}
+  
 end
