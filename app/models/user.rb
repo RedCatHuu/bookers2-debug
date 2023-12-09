@@ -12,6 +12,7 @@ class User < ApplicationRecord
   # フォロワー目線。フォローしているユーザーとの関連付け。follower_idを取得。
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   # フォローしているユーザーを取得。上記で取得したfollower_idと繋がるfollowed_idを取得。:sourceパラーメーターを使ってfolloweing配列のもとは「followed」idの集合であるということをrailsに伝えている。
+  # この記述があることで、User.following.countのように、フォローしてくれた人を数えることができる。
   has_many :following, through: :active_relationships, source: :followed
   
   # followed目線。フォロワーとの関連付け

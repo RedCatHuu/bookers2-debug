@@ -24,6 +24,12 @@ class BooksController < ApplicationController
       @books = Book.sort_new
     elsif params[:old].present?
       @books = Book.sort_old
+    elsif params[:more_like].present?
+      @books = Book.includes(:favorited_users).sort_by { |a|
+      a.favorited_users.includes(:favorites).size }.reverse
+    elsif params[:less_like].present?
+      @books = Book.includes(:favorited_users).sort_by { |a|
+      a.favorited_users.includes(:favorites).size }
     else
       @books = Book.all
     end 

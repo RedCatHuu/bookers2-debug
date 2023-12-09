@@ -2,7 +2,12 @@ class Book < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_many :book_comments, dependent: :destroy
+  
   has_many :favorites,dependent: :destroy
+  # 下記はいいねランキング作成のために追加。
+  # 下記がなくてもfavorites.countで数えることはできるが、いいねをした人を参照するのは難しい。
+  # 下記によって、Book.favorited_usersを使うことでき、いいねした人の一覧表示等ができる。
+  has_many :favorited_users, through: :favorites, source: :user
   
   has_many :book_tags, dependent: :destroy
   has_many :tags, through: :book_tags
