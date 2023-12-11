@@ -2,11 +2,17 @@ class Book < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_many :book_comments, dependent: :destroy
+  
   has_many :favorites,dependent: :destroy
+  # 下記はいいねランキング作成のために追加。
+  # 下記がなくてもfavorites.countで数えることはできるが、いいねをした人を参照するのは難しい。
+  # 下記によって、Book.favorited_usersを使うことでき、いいねした人の一覧表示等ができる。
+  has_many :favorited_users, through: :favorites, source: :user
   
   has_many :book_tags, dependent: :destroy
   has_many :tags, through: :book_tags
-
+  has_many :read_counts, dependent: :destroy
+  
   validates :title, presence: true
   validates :body, presence: true, length: {maximum: 200}
 
@@ -36,7 +42,12 @@ class Book < ApplicationRecord
       # self.tags.push(tag)と同じ意味
       self.tags << tag
     end 
-  end
-
-
+  end 
+  
+  # scope :sort_new, -> { order(created_at: :desc)}
+  # カラムをidにしても同じ。
+  scope :sort_new, -> { order(id: :desc)}
+  # 以下はscope :sort_new, -> { order(created_at: :asc)}と同じ意味デフォルトがascだから記述はいらない。
+  scope :sort_old, -> { order(:created_at)}
+ 
 end

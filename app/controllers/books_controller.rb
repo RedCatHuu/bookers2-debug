@@ -6,12 +6,34 @@ class BooksController < ApplicationController
     # @book_new = Book.new
     @comment = BookComment.new
     # @tag = @book.tags
+    # read_count = ReadCount.new(book_id: @book.id, user_id: current_user.id)
+    # read_count.save
+    # 上2行をまとめて書くと下記のようになる。unlessは除く。
+    # timezoneによって、今日作成した閲覧レコードを抽出、その中で、現在のユーザーが現在の本を読んだ記録があるか探す。
+    unless ReadCount.where(created_at: Time.zone.now.all_day).find_by(user_id: current_user, book_id: @book.id)
+      current_user.read_counts.create(book_id: @book.id)
+    end 
   end
 
   def index
     @book = Book.new
-    @books = Book.all
     @tag_list = Tag.all
+    
+    # paramsに"new"が含まれているか確認。
+    if params[:new].present?
+      @books = Book.sort_new
+    elsif params[:old].present?
+      @books = Book.sort_old
+    elsif params[:more_like].present?
+      @books = Book.includes(:favorited_users).sort_by { |a|
+      a.favorited_users.includes(:favorites).size }.reverse
+    elsif params[:less_like].present?
+      @books = Book.includes(:favorited_users).sort_by { |a|
+      a.favorited_users.includes(:favorites).size }
+    else
+      @books = Book.all
+    end 
+    
   end
 
   def create

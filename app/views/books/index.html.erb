@@ -9,6 +9,12 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
+      <p>
+        <%= link_to '新しい順', books_path(new:"new") %> |
+        <%= link_to '古い順', books_path(old:"old") %> |
+        <%= link_to 'いいねの多い順', books_path(more_like:"more_like") %> |
+        <%= link_to 'いいねの少ない順', books_path(less_like:"less_like") %>
+      </p>
       <%= render 'index', books: @books%>
       <% @tag_list.each do |tag| %>
         <span>
