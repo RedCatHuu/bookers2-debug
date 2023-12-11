@@ -22,6 +22,9 @@ class User < ApplicationRecord
   
   has_many :read_counts, dependent: :destroy
   
+  has_many :user_groups
+  has_many :groups, through: :user_groups
+  
   validates :name, length: {minimum: 2, maximum: 20}, uniqueness: true
   validates :introduction, length: {maximum: 50}
   
