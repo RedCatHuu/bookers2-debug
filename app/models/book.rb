@@ -11,15 +11,14 @@ class Book < ApplicationRecord
   
   has_many :book_tags, dependent: :destroy
   has_many :tags, through: :book_tags
-  
   has_many :read_counts, dependent: :destroy
   
   validates :title, presence: true
   validates :body, presence: true, length: {maximum: 200}
-  
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
-  end 
+  end
   
   def save_book_tags(category)
     # 投稿物にタグが存在していれば、タグの名前を配列として取得。update用
@@ -50,5 +49,5 @@ class Book < ApplicationRecord
   scope :sort_new, -> { order(id: :desc)}
   # 以下はscope :sort_new, -> { order(created_at: :asc)}と同じ意味デフォルトがascだから記述はいらない。
   scope :sort_old, -> { order(:created_at)}
-  
+ 
 end
